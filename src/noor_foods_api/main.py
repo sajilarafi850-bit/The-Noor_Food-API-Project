@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 
 from .config import configure_logging, get_settings
-from .routers import categories, products
+from .routers import categories, orders, products
 
 configure_logging(debug=get_settings().debug)
 logger = logging.getLogger(__name__)
@@ -19,6 +19,7 @@ app = FastAPI(
 
 app.include_router(categories.router)
 app.include_router(products.router)
+app.include_router(orders.router)
 
 
 @app.middleware("http")
