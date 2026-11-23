@@ -5,6 +5,10 @@ from sqlmodel import Session, col, select
 from .models import Category, Product, ProductCreate, ProductUpdate
 
 
+def get_category(session: Session, category_id: int):
+    return session.get(Category, category_id)
+
+
 def list_categories(session: Session) -> list[Category]:
     statement = select(Category).order_by(col(Category.category_id))
     return list(session.exec(statement).all())
